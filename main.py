@@ -14,30 +14,30 @@ def test():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     browser= webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    browser.get("https://listingcenter.nasdaq.com/noncompliantcompanylist.aspx")
     expand = browser.find_element_by_class_name("rgExpand")
     expand.click()
     time.sleep(1)
+    table = browser.find_element_by_xpath('//table[contains(@class, "rgMasterTable")]')
+    table = table.get_attribute('innerHTML')
+    browser.quit()
+    table = html.fromstring(table)
+    rows = table.xpath('.//tbody/tr')
     data = []
-    rows = browser.find_elements_by_xpath('//table[contains(@class, "rgMasterTable")]/tbody/tr')
     header = ""
     for row in rows:
-        className = row.get_attribute('class')
+        className = row.get('class')
         if className == "rgGroupHeader":
-            header = row.find_element_by_xpath(".//td[last()]/p")
+            header = row.xpath(".//td[last()]/p")[0].text_content()
         else:
             company = {
-                "name": header.text,
+                "name": header,
                 "tickers": [],
-                "deficiency": "",
-                "market": "",
-                "date": ""
             }
-            tickerContainer = row.find_element_by_xpath('.//*[contains(@class, "LeftPadding")]')
-            tickers = tickerContainer.find_elements_by_xpath(('.//a'))
+            tickerContainer = row.xpath('.//*[contains(@class, "LeftPadding")]')[0]
+            tickers = tickerContainer.xpath(('.//a'))
             for t in tickers:
-                company["tickers"].append(t.text)
-            categories = tickerContainer.find_elements_by_xpath('.//following-sibling::td')
+                company["tickers"].append(t.text_content())
+            categories = tickerContainer.xpath('.//following-sibling::td')
             i = 0
             for category in categories: 
                 if i == 0: 
@@ -48,6 +48,7 @@ def test():
                     company["date"] = category.text
                 i += 1
             data.append(company)
+            print(company)
     return jsonify(data)
 
 if __name__ == '__main__':
