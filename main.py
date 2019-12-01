@@ -14,7 +14,7 @@ def test():
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get("https://listingcenter.nasdaq.com/noncompliantcompanylist.aspx")
     expand = driver.find_element_by_class_name("rgExpand")
-    return expand.toString()
+    return expand
 
 if __name__ == '__main__':
     app.run()
