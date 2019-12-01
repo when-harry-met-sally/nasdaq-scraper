@@ -17,7 +17,7 @@ def test():
     driver.get("https://listingcenter.nasdaq.com/noncompliantcompanylist.aspx")
     expand = driver.find_element_by_class_name("rgExpand")
     expand.click()
-    time.sleep(.2)
+    time.sleep(1)
     headers = driver.find_elements_by_xpath('//*[contains(@class, "rgGroupHeader")]//p')
     details = driver.find_elements_by_xpath('//*[contains(@title, "Quote")]/parent::*/following-sibling::td')
     data = []
