@@ -1,6 +1,7 @@
 from selenium import webdriver
 from flask import Flask
 from flask import jsonify
+from lxml import html
 import time
 import os
 
