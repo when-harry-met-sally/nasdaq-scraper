@@ -1,5 +1,12 @@
 from selenium import webdriver
+from flask import Flask
 import os
+
+app = Flask(__name__)
+
+@app.route("/")
+def test():
+    return 'Hello World'
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
