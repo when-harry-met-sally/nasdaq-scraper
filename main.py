@@ -17,7 +17,7 @@ def test():
     driver.get("https://listingcenter.nasdaq.com/noncompliantcompanylist.aspx")
     expand = driver.find_element_by_class_name("rgExpand")
     expand.click()
-    time.sleep(1)
+    time.sleep(.2)
     headers = driver.find_elements_by_xpath('//*[contains(@class, "rgGroupHeader")]//p')
     details = driver.find_elements_by_xpath('//*[contains(@title, "Quote")]/parent::*/following-sibling::td')
     data = []
@@ -35,7 +35,6 @@ def test():
     i = 1
     counter = 0
     for x in details:
-        print(i)
         if (i == 1):
             data[counter]["ticker"] = x.text
         elif (i == 2):
