@@ -34,6 +34,7 @@ def test():
             company = {
                 "name": header,
                 "tickers": [],
+                "exchange": "NASDAQ",
             }
             tickerContainer = row.xpath('.//*[contains(@class, "LeftPadding")]')[0]
             tickers = tickerContainer.xpath(('.//a'))
