@@ -63,7 +63,7 @@ def setFavorites():
         i = row[0]
         favorite = row[1]
         URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=' + favorite
-         r = requests.get(URL)
+        r = requests.get(URL)
     return jsonify(req_data)
 
 def scrapeCalendar(URL):
