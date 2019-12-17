@@ -56,7 +56,7 @@ def getFavorites():
 
 @app.route("/brwlrz/setFavorites", methods=['POST'])
 def setFavorites():
-    req_data = request.get_json
+    req_data = request.get_json()
     return req_data
 
 def scrapeCalendar(URL):
