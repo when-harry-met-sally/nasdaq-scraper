@@ -57,6 +57,12 @@ def getFavorites():
 @app.route("/brwlrz/setFavorites", methods=['POST'])
 def setFavorites():
     req_data = request.get_json()
+    token = 'api1575404422oY4rNBhdTW9JjgfyulEi78894'
+    calendar = '1576110713243225' 
+    for row in req_data():
+        i = row[0]
+        favorite = row[1]
+        URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=' + favorite
     return jsonify(req_data)
 
 def scrapeCalendar(URL):
