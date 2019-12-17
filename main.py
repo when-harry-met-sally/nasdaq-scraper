@@ -36,7 +36,24 @@ def scrape():
     events = scrapeCalendar(URL)
     events = jsonify(events)
     return events
-    
+
+@app.route("/brwlrz/getFavorites")
+def getEvents():
+    token = 'api1575404422oY4rNBhdTW9JjgfyulEi78894'
+    calendar = '1576110713243225' 
+    url = 'https://www.addevent.com/api/v1/me/calendars/events/list/?token=' + token + '&calendar_id=' + calendar
+    events = []
+    while True:
+        old = requests.get(url)
+        old = old.json()
+        past = old['events']
+        events += past
+        if old['paging']['next'] is '':
+            break
+        else:
+            url = old['paging']['next']
+    return jsonify(events)
+
 def scrapeCalendar(URL):
     tree = makeRequestAndGetTree(URL)
     if tree is None:
