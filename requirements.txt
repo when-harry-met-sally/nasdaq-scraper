@@ -63,7 +63,7 @@ tornado==5.1.1
 tqdm==4.39.0
 Twisted==19.10.0
 typed-ast==1.4.0
-urllib3==1.22
+urllib3==1.24.2
 urwid==2.0.1
 w3lib==1.21.0
 Werkzeug==0.14.1
