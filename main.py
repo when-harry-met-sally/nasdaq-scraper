@@ -1,5 +1,5 @@
 from selenium import webdriver
-from flask import Flask, requests, request
+from flask import Flask, request
 from flask import jsonify
 from lxml import html
 import requests
