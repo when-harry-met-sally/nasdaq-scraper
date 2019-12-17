@@ -1,5 +1,5 @@
 from selenium import webdriver
-from flask import Flask
+from flask import Flask, requests, request
 from flask import jsonify
 from lxml import html
 import requests
@@ -38,7 +38,7 @@ def scrape():
     return events
 
 @app.route("/brwlrz/getFavorites")
-def getEvents():
+def getFavorites():
     token = 'api1575404422oY4rNBhdTW9JjgfyulEi78894'
     calendar = '1576110713243225' 
     url = 'https://www.addevent.com/api/v1/me/calendars/events/list/?token=' + token + '&calendar_id=' + calendar
@@ -53,6 +53,11 @@ def getEvents():
         else:
             url = old['paging']['next']
     return jsonify(events)
+
+@app.route("/brwlrz/setFavorites", methods=['POST'])
+def setFavorites():
+    req_data = request.get_json
+    return req_data
 
 def scrapeCalendar(URL):
     tree = makeRequestAndGetTree(URL)
