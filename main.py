@@ -67,8 +67,10 @@ def setFavorites():
     for row in req_data:
         i = str(row[0])
         favorite = str(row[1])
+        print('test')
         for event in events:
-            if (event['id'] is i):
+            if (event['id'] == i):
+                print(event)
                 URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=' + favorite + '&title=' + event['title'] + '&description=' + event['description'] + '&datestart=' + event['date_start'] + '&timezone=' + event['timezone']
                 r = requests.get(URL)
                 print(r)
