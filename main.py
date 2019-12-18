@@ -63,7 +63,7 @@ def setFavorites():
         i = str(row[0])
         favorite = str(row[1])
         print(i, '-', favorite)
-        URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=' + favorite
+        URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=x'
         r = requests.get(URL)
         print(r)
     return jsonify(req_data)
