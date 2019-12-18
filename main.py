@@ -37,8 +37,7 @@ def scrape():
     events = jsonify(events)
     return events
 
-@app.route("/brwlrz/getFavorites")
-def getFavorites():
+def getEvents():
     token = 'api1575404422oY4rNBhdTW9JjgfyulEi78894'
     calendar = '1576110713243225' 
     url = 'https://www.addevent.com/api/v1/me/calendars/events/list/?token=' + token + '&calendar_id=' + calendar
@@ -52,6 +51,11 @@ def getFavorites():
             break
         else:
             url = old['paging']['next']
+    return events
+
+@app.route("/brwlrz/getFavorites")
+def getFavorites():
+    events = getEvents()
     return jsonify(events)
 
 @app.route("/brwlrz/setFavorites", methods=['POST'])
@@ -59,13 +63,16 @@ def setFavorites():
     req_data = request.get_json()
     token = 'api1575404422oY4rNBhdTW9JjgfyulEi78894'
     calendar = '1576110713243225' 
+    events = getEvents()
     for row in req_data:
         i = str(row[0])
         favorite = str(row[1])
-        print(i, '-', favorite)
-        URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=x'
-        r = requests.get(URL)
-        print(r)
+        for event in events:
+            if (event['id'] is i):
+                URL = 'https://www.addevent.com/api/v1/me/calendars/events/save/?token=' + token +'&calendar_id=' + calendar +'&event_id='+ i + '&organizer_email=' + favorite + '&title=' + event['title'] + '&description=' + event['description'] + '&datestart=' + event['date_start'] + '&timezone=' + event['timezone']
+                r = requests.get(URL)
+                print(r)
+                break
     return jsonify(req_data)
 
 def scrapeCalendar(URL):
