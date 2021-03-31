@@ -29,7 +29,7 @@ Jinja2==2.10
 kaitaistruct==0.8
 lazy-object-proxy==1.4.3
 ldap3==2.5.2
-lxml==4.4.2
+lxml==4.6.3
 MarkupSafe==1.0
 # menuinst==1.4.11
 mitmproxy==4.0.4
