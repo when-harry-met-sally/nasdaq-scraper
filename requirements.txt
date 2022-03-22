@@ -32,7 +32,7 @@ ldap3==2.5.2
 lxml==4.4.2
 MarkupSafe==1.0
 # menuinst==1.4.11
-mitmproxy==4.0.4
+mitmproxy==8.0.0
 parsel==1.5.2
 passlib==1.7.2
 Protego==0.1.15
