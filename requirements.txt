@@ -61,7 +61,7 @@ sortedcontainers==2.0.5
 soupsieve==1.9.5
 tornado==5.1.1
 tqdm==4.39.0
-Twisted==19.10.0
+Twisted==22.4.0
 typed-ast==1.4.0
 urllib3==1.22
 urwid==2.0.1
